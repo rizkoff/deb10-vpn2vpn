@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: vpn2vpn
+  name: vpn-svc
+  namespace: vpn-ns
+spec:
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ports:
+  - name: http
+    nodePort: 32401
+    port: 443
+    protocol: TCP
+    targetPort: 443
+  selector:
+    run: vpn2vpn
+  sessionAffinity: None
+  type: NodePort
